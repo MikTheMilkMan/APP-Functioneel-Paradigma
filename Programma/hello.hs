@@ -2,6 +2,27 @@ main :: IO ()
 main = do
   putStrLn "Hello, everybody!"
   putStrLn ("Please look at my favorite odd numbers: " ++ show (filter odd [10..20]))
+  putStrLn(easyCompression testString)
+
+
+testString::String
+testString = "AAAAABBBBBCCCDDDDEEEEEE"
+
+testString2::String
+testString2 = "guh"
+
+
+easyCompression::String -> String
+easyCompression s = s
+
+countCharsInString::String -> Int
+countCharsInString = 
+
+
+
+-- String bestaat uit 5x A, 5x B, 3x C, 4x D en 6x E. 
+-- Als deze String door een RLE-compressie-algoritme wordt gehaald, moet het resultaat
+-- dus "A5B5C3D4E6" zijn
 
 
   
