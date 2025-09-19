@@ -1,7 +1,6 @@
 package nl.han.APP.Challenge;
 
 public class Challenge {
-
     public String simpleCompressNonFunctionally(String input, int index, int count) {
         if (index == input.length() - 1) {
             if (input.charAt(index) != input.charAt(index - 1)) {

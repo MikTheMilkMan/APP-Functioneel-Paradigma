@@ -1,25 +1,39 @@
+import Data.Text.Internal.Builder.Functions (i2d)
 main :: IO ()
 main = do
-  putStrLn "Hello, everybody!"
-  putStrLn ("Please look at my favorite odd numbers: " ++ show (filter odd [10..20]))
-  putStrLn(easyCompression testString)
+ putStrLn (guh "guh")
+  -- putStrLn(compression testString 1 1)
+
+
 
 
 testString::String
-testString = "AAAAABBBBBCCCDDDDEEEEEE"
+testString = "AAAAABBBBBCCCDDDDEEEEEEF"
 
-testString2::String
-testString2 = "guh"
+guhh::Integer
+guhh = return 2
+
+guh :: String -> Char
+guh input = return input!!1
 
 
-easyCompression::String -> String
-easyCompression s = s
+-- compression :: String Integer Integer -> String
+-- compression input index count = 
+--   if index == input.length
+--     if(input[index])
 
-testFunctionWithStrings::String -> String
-testFunctionWithStrings s = 
 
-countCharsInString::String -> Int
-countCharsInString s = 
+
+
+
+
+
+
+
+
+
+
+
 
 -- recursie gok ik denk ik lol
 
