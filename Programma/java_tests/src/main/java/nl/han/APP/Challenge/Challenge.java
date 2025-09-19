@@ -2,29 +2,26 @@ package nl.han.APP.Challenge;
 
 public class Challenge {
 
-    public String simpleCompressNonFunctionally(String input) {
-        StringBuilder output = new StringBuilder();
-        char prevChar = input.charAt(0);
-        int count = 1;
-
-        for (int i = 0; i < input.length(); i++) {
-
-            if (i == input.length() - 1) {
-                prevChar = input.charAt(i);
-                String t = prevChar + String.valueOf(count);
-                output.append(t);
-            } else if (input.charAt(i) == prevChar) {
-                count++;
-            } else if (input.charAt(i) != prevChar) {
-                String t = prevChar + String.valueOf(count);
-                output.append(t);
-                count = 1;
-                prevChar = input.charAt(i);
+    public String simpleCompressNonFunctionally(String input, int index, int count) {
+        if (index == input.length() - 1) {
+            if (input.charAt(index) != input.charAt(index - 1)) {
+                return (String.valueOf(input.charAt(index - 1)) + count + input.charAt(index) + 1);
+            } else {
+                return String.valueOf(input.charAt(index)) + (count + 1);
             }
-
         }
 
-        return output.toString();
+        if (input.charAt(index) != input.charAt(index - 1)) {
+            return String.valueOf(input.charAt(index - 1)) + count + simpleCompressNonFunctionally(input, index + 1, 1);
+        } else {
+            return simpleCompressNonFunctionally(input, index + 1, count + 1);
+        }
+
+
+        //iterate through string
+        //check current char against previous char
+        //if the same, recursion && count++
+        //if different, return previous char + count + recursion
     }
 }
 

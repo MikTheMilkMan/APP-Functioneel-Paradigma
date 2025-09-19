@@ -15,10 +15,13 @@ testString2 = "guh"
 easyCompression::String -> String
 easyCompression s = s
 
+testFunctionWithStrings::String -> String
+testFunctionWithStrings s = 
+
 countCharsInString::String -> Int
-countCharsInString = 
+countCharsInString s = 
 
-
+-- recursie gok ik denk ik lol
 
 -- String bestaat uit 5x A, 5x B, 3x C, 4x D en 6x E. 
 -- Als deze String door een RLE-compressie-algoritme wordt gehaald, moet het resultaat
