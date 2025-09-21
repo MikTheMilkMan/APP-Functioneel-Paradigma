@@ -1,20 +1,22 @@
 import Data.Text.Internal.Builder.Functions (i2d)
 main :: IO ()
-main = do
- putStrLn (guh "guh")
-  -- putStrLn(compression testString 1 1)
+main = do 
+  
+  print(add 1 2)
+  print(guh "test")
 
 
 
 
-testString::String
-testString = "AAAAABBBBBCCCDDDDEEEEEEF"
+-- testString::String
+-- testString = "AAAAABBBBBCCCDDDDEEEEEEF"
 
-guhh::Integer
-guhh = return 2
+
+add :: Integer -> Integer -> Integer
+add x y = x + y
 
 guh :: String -> Char
-guh input = return input!!1
+guh input = input!!0
 
 
 -- compression :: String Integer Integer -> String
