@@ -4,11 +4,11 @@ import Data.Text.Internal.Builder.Functions (i2d)
 import Data.Char (intToDigit)
 main :: IO ()
 main = do
-  print(compression testString 1 0)
+  print(compression testString 1 1)
 
 
 testString::String
-testString = "AAAAABBBBBCCCDDDDEEEEEEF"
+testString = "AAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
 
 
 
