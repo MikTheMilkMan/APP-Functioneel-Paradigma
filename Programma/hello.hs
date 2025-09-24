@@ -4,19 +4,13 @@ import Data.Text.Internal.Builder.Functions (i2d)
 import Data.Char (intToDigit)
 main :: IO ()
 main = do
-  print(compression testString 1 1)
+  -- print(compression testString 1 1)
+  -- print(characterGiver 'A' 4)
+  print (decompression "A5B5C3D4E6F1G1H1I1J1" 0)
 
 
 testString::String
 testString = "AAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
-
-
-
--- compression :: String Integer Integer -> String
--- compression input index count
---   | index == input.length
---   = input index count | input[index] == input[index - 1]
---   = 
 
 
 
@@ -34,25 +28,30 @@ compression input index count =
     else
       compression input (index + 1) (count + 1)
 
--- compression' input index count
---   | index == input.length = if input [index] != input [index - 1] then
---       return input [index - 1] + count + input [index] + 1
---     else
---       return input [index] + (count + 1)
---   | input [index] != input [index - 1] = return input [index - 1] + count + (compression' input index + 1 1)
---   | otherwise = return compression' input (index + 1) (count + 1)
 
 
 
--- compression input index count
---   | index == input.length = if input [index] != input [index - 1] then
---       return input [index - 1] + count + input [index] + 1
---     else
---       return input [index] + (count + 1)
---   | input [index] != input [index - 1] = return input [index - 1] + count + (compression input index + 1 1)
---   | otherwise = return (compression input index + 1 count + 1)
 
 
+-- Eventjes anders designen, omdat je (als dit zou werken) niet verder zou kunnen komen dan 
+-- 9 achtereenvolgende letters
+
+
+decompression :: String -> Int -> String
+decompression input index =
+  if index == length input - 1 then
+    characterGiver (input!!index) (read input!!(index+1) :: Int)
+  else
+    characterGiver (input!!index) (read input!!(index+1) :: Int) ++ decompression input (index+2)
+
+
+
+characterGiver :: Char -> Int -> String
+characterGiver char count =
+  if count > 1 then
+    char : characterGiver char (count - 1)
+  else
+    [char]
 
 -- TESTS --
 
