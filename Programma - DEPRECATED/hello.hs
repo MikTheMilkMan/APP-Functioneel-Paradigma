@@ -1,12 +1,14 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use guards" #-}
-import Data.Text.Internal.Builder.Functions (i2d)
-import Data.Char (intToDigit)
+import Data.Char ( intToDigit, isDigit )
+import Data.List () 
+
 main :: IO ()
 main = do
   -- print(compression testString 1 1)
   -- print(characterGiver 'A' 4)
-  print (decompression "A5B5C3D4E6F1G1H1I1J1" 0)
+  print(amountCompleter "A111" 0)
+  -- print (decompression "A5B5C3D4E6F1G1H1I1J1" 0)
 
 
 testString::String
@@ -37,13 +39,34 @@ compression input index count =
 -- 9 achtereenvolgende letters
 
 
-decompression :: String -> Int -> String
-decompression input index =
-  if index == length input - 1 then
-    characterGiver (input!!index) (read input!!(index+1) :: Int)
-  else
-    characterGiver (input!!index) (read input!!(index+1) :: Int) ++ decompression input (index+2)
+-- decompression :: String -> Int -> String
+-- decompression input index =
 
+-- -- if input!!index+2 == getal, ga naar aparte functie om hier een getal van te maken
+
+--   if index == length input - 1 then
+--     characterGiver (input!!index) (read input!!(index+1) :: Int)
+--   else
+--     if  isDigit (input!!(index+2)) then
+      
+--     else
+
+
+--     characterGiver (input!!index) (read input!!(index+1) :: Int) ++ decompression input (index+2)
+
+valueSeparator :: String -> Int -> [String]
+valueSeparator input index =
+  split 
+
+
+
+  -- if index == length input - 1 then
+  
+  -- else
+  --   if isDigit (input!!(index+1)) then
+  --     input!!(index+1) : amountCompleter input (index+1)
+  --   else
+  --     [input!!(index+1)] 
 
 
 characterGiver :: Char -> Int -> String
