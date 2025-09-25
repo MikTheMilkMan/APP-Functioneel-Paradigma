@@ -3,7 +3,7 @@
 
 import Data.Char ( intToDigit, isDigit, digitToInt )
 import Data.List.Split ( split, startsWithOneOf, condense, oneOf )
-
+import Data.Integer.Conversion ( stringToInteger )
 
 main :: IO ()
 main = do
@@ -14,9 +14,37 @@ main = do
     -- print(charAndAmountSplitter ((pairGiver "A22B23D46G88")!!0))
     -- print(charAndAmountSplitter "A22B23D46G88")
 
-    print(pairGiver "A12B23C4D8e1f2g13")
-    print(length (pairGiver "A12B23C4D8e1f2g13"))
-    -- print (decompression (pairGiver "A12B23C4D8e1f2g13") 0)
+    -- print(pairGiver "A12B23C4D8e1f2g13")
+    -- print(length (pairGiver "A12B23C4D8e1f2g13"))
+    -- print(charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!0) )
+    -- print(charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!1) )
+    -- print(charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!2) )
+    -- print(charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!3) )
+    -- print(charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!4) )
+    -- print(charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!5) )
+    -- print(charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!6) )
+
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!0))!!0)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!1))!!0)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!2))!!0)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!3))!!0)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!4))!!0)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!5))!!0)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!6))!!0)
+
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!0))!!1)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!1))!!1)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!2))!!1)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!3))!!1)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!4))!!1)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!5))!!1)
+    -- print((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!6))!!1)
+
+
+    -- print(stringToInteger ((charAndAmountSplitter ((pairGiver "A12B23C4D8e1f2g13")!!1))!!1))
+
+
+    print (decompression (pairGiver "A12B23C4D8e1f2g13") 0)
     
 
 
@@ -35,6 +63,7 @@ characterGiver char count =
     char : characterGiver char (count - 1)
   else
     [char]
+
 
 charAndAmountSplitter :: String -> [String]
 charAndAmountSplitter input = 
@@ -61,16 +90,16 @@ compression input index count =
 
 decompression :: [String] -> Int -> String
 decompression input index =    
-    if index == length input - 1 then 
-      characterGiver (
-        (charAndAmountSplitter (input!!index))!!0!!0) 
-        (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) 
-      )
+    if index == {-  length input - 1  -} 0 then 
+      characterGiver 
+        ((charAndAmountSplitter (input!!index))!!0!!0) 
+        -- (stringToInteger ((charAndAmountSplitter (input!!index))!!0!!1))
+        22  
     else 
-      characterGiver (
-        (charAndAmountSplitter (input!!index))!!0!!0) 
-        (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) 
-      )
+      characterGiver 
+        ((charAndAmountSplitter (input!!index))!!0!!0) 
+        (stringToInteger ((charAndAmountSplitter (input!!index))!!0!!1))
+        -- 22
       ++ decompression input (index+1)
     
 

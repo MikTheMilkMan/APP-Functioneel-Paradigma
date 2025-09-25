@@ -20,6 +20,16 @@
   (major1) == 4 && (major2) <  18 || \
   (major1) == 4 && (major2) == 18 && (minor) <= 3)
 #endif /* MIN_VERSION_base */
+/* package integer-conversion-0.1.1 */
+#ifndef VERSION_integer_conversion
+#define VERSION_integer_conversion "0.1.1"
+#endif /* VERSION_integer_conversion */
+#ifndef MIN_VERSION_integer_conversion
+#define MIN_VERSION_integer_conversion(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  1 || \
+  (major1) == 0 && (major2) == 1 && (minor) <= 1)
+#endif /* MIN_VERSION_integer_conversion */
 /* package split-0.2.5 */
 #ifndef VERSION_split
 #define VERSION_split "0.2.5"
