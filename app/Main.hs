@@ -49,12 +49,8 @@ main = do
     -- print(pairGiver "A5B5C3D4E6F1G1H1I1J1j2J1")
     -- print (decompression (pairGiver "A5B5C3D4E6F1G1H1I1J1j2J1") 0)
 
-
--- ["A5","B5","C3","D4","E6","F1","G1","H1","I1","J1","j2","J1"]
       print (compression testString 1 1)
-      print (testString)
-      print (decompression (pairGiver (compression testString 1 1)) 0) 
-      print (decompression' (compression testString 1 1))
+      print (decompression (compression testString 1 1))
     
 
 
@@ -62,10 +58,6 @@ main = do
 testString::String
 testString = "AAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
 
-
-pairGiver :: String -> [String]
-pairGiver input =
-  split (startsWithOneOf ['A'..]) input
 
 characterGiver :: Char -> Integer -> String
 characterGiver char count =
@@ -95,10 +87,15 @@ compression input index count =
 
 -- Eventjes anders designen, omdat je (als dit zou werken) niet verder zou kunnen komen dan 
 -- 9 achtereenvolgende letters
+  
+
+decompression :: String -> String
+decompression input =
+  decode (split (startsWithOneOf ['A'..]) input) 0
 
 
-decompression :: [String] -> Int -> String
-decompression input index =    
+decode :: [String] -> Int -> String
+decode input index =    
     if index == length input - 1  {- 0 -} then 
       characterGiver 
         ((charAndAmountSplitter (input!!index))!!0!!0) 
@@ -107,25 +104,7 @@ decompression input index =
       characterGiver 
         ((charAndAmountSplitter (input!!index))!!0!!0) 
         (stringToInteger ((charAndAmountSplitter (input!!index))!!1))
-      ++ decompression input (index+1)
-    
-
-decompression' :: String -> String
-decompression' input =
-  decode' (split (startsWithOneOf ['A'..]) input) 0
-
-
-decode' :: [String] -> Int -> String
-decode' input index =    
-    if index == length input - 1  {- 0 -} then 
-      characterGiver 
-        ((charAndAmountSplitter (input!!index))!!0!!0) 
-        (stringToInteger ((charAndAmountSplitter (input!!index))!!1)) 
-    else 
-      characterGiver 
-        ((charAndAmountSplitter (input!!index))!!0!!0) 
-        (stringToInteger ((charAndAmountSplitter (input!!index))!!1))
-      ++ decompression input (index+1)
+      ++ decode input (index+1)
 
 
 -- TESTS --
