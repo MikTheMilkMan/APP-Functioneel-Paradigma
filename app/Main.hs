@@ -12,10 +12,11 @@ main = do
     -- print(characterGiver 'A' 4)
     -- print(pairGiver "A22B23D46G88")
     -- print(charAndAmountSplitter ((pairGiver "A22B23D46G88")!!0))
-
     -- print(charAndAmountSplitter "A22B23D46G88")
-    -- print(decompression ["A1", "B1", "C1", "D3"] 0)
-    print (decompression (pairGiver "A12B23C4D8e1f2g13") 0)
+
+    print(pairGiver "A12B23C4D8e1f2g13")
+    print(length (pairGiver "A12B23C4D8e1f2g13"))
+    -- print (decompression (pairGiver "A12B23C4D8e1f2g13") 0)
     
 
 
@@ -60,48 +61,18 @@ compression input index count =
 
 decompression :: [String] -> Int -> String
 decompression input index =    
-    if index == length input - 2 then 
-      -- input!!index == [A, 2, 2] == A22
-      -- characterGiver (input!!index!!0) ( digitToInt (input!!index!!1))
-
-      -- charAndAmountSplitter = [[A], [2, 2]]
-      characterGiver ((charAndAmountSplitter (input!!index))!!0!!0) (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) )
-
-      
-
-
-
-
-
-        -- [
-        --     characterGiver ((charAndAmountSplitter input!!index)!!0!!0) (read (charAndAmountSplitter input!!index)!!1 :: Int)
-        -- ]
-        
-
-        -- [characterGiver charAndAmount!!0 (read charAndAmount!!1 :: Integer)]
-        --return charactergiver (split letter van Int::hoeveelheid)
+    if index == length input - 1 then 
+      characterGiver (
+        (charAndAmountSplitter (input!!index))!!0!!0) 
+        (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) 
+      )
     else 
-      -- DOET HET
-      characterGiver ((charAndAmountSplitter (input!!index))!!0!!0) (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) ) ++ decompression input (index+1)
-      
-        -- input!!index ++ (decompression input (index+1))
-        -- characterGiver (input!!index!!0) (digitToInt(input!!index!!1)) ++ decompression input (index+1)
-
-      
-      --DOET HET NIET      
-
-        -- [
-        --     characterGiver 
-        --     (charAndAmountSplitter input!!index)!!0 
-        --     (read (charAndAmountSplitter input!!index)!!1 :: Integer)
-        -- ] : decompression input (index+1)
-        
-
-        -- [characterGiver charAndAmount!!0 (read charAndAmount!!1 :: Integer)] : decompression input (index+1)
-        --return charactergiver (split letter van Int::hoeveelheid) : decompression input (index+1) 
-
-
-
+      characterGiver (
+        (charAndAmountSplitter (input!!index))!!0!!0) 
+        (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) 
+      )
+      ++ decompression input (index+1)
+    
 
 
 -- TESTS --
