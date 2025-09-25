@@ -50,17 +50,21 @@ main = do
     -- print (decompression (pairGiver "A5B5C3D4E6F1G1H1I1J1j2J1") 0)
 
       print (compression testString 1 1)
-      print (decompression (compression testString 1 1))
+      print (decompression (compression testString1 1 1))
+      print ((decompression (compression testString1 1 1)) == testString1)
+
       print ("========================")
+      
       print (compression testString2 1 1) 
       print (decompression (compression testString2 1 1))
+      print ((decompression (compression testString2 1 1)) == testString2)
 
     
 
 
 
-testString::String
-testString = "AAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
+testString1::String
+testString1 = "AAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
 
 testString2::String
 testString2 = "AAAAAAAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
