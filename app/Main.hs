@@ -10,8 +10,8 @@ main = do
     -- print("guh")
     -- print(compression testString 1 1)
     -- print(characterGiver 'A' 4)
-    print(pairGiver "A22B23D46G88")
-    print(charAndAmountSplitter ((pairGiver "A22B23D46G88")!!0))
+    -- print(pairGiver "A22B23D46G88")
+    -- print(charAndAmountSplitter ((pairGiver "A22B23D46G88")!!0))
 
     -- print(charAndAmountSplitter "A22B23D46G88")
     -- print(decompression ["A1", "B1", "C1", "D3"] 0)
@@ -61,10 +61,16 @@ compression input index count =
 decompression :: [String] -> Int -> String
 decompression input index =    
     if index == length input - 2 then 
-      characterGiver (input!!index!!0) ( digitToInt (input!!index!!1))
+      -- input!!index == [A, 2, 2] == A22
+      -- characterGiver (input!!index!!0) ( digitToInt (input!!index!!1))
+
+      -- charAndAmountSplitter = [[A], [2, 2]]
+      characterGiver ((charAndAmountSplitter (input!!index))!!0!!0) (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) )
+
+      
 
 
-      -- characterGiver ((charAndAmountSplitter input!!index)!!0!!0) (digitToInt ((charAndAmountSplitter input!!index)!!0!!1) )
+
 
 
         -- [
@@ -76,12 +82,13 @@ decompression input index =
         --return charactergiver (split letter van Int::hoeveelheid)
     else 
       -- DOET HET
-        -- input!!index ++ (decompression input (index+1))
-        characterGiver (input!!index!!0) (digitToInt(input!!index!!1)) ++ decompression input (index+1)
+      characterGiver ((charAndAmountSplitter (input!!index))!!0!!0) (digitToInt ((charAndAmountSplitter (input!!index))!!0!!1) ) ++ decompression input (index+1)
       
+        -- input!!index ++ (decompression input (index+1))
+        -- characterGiver (input!!index!!0) (digitToInt(input!!index!!1)) ++ decompression input (index+1)
+
       
       --DOET HET NIET      
-      -- characterGiver ((charAndAmountSplitter input!!index)!!0) (digitToInt((charAndAmountSplitter input!!index)!!1)) ++ decompression input (index+1)
 
         -- [
         --     characterGiver 
