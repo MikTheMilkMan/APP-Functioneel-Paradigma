@@ -1,17 +1,22 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Use guards" #-}
 
-import Data.Char ( intToDigit, isDigit )
-import Data.List.Split ( split, startsWithOneOf )
+import Data.Char ( intToDigit, isDigit, digitToInt )
+import Data.List.Split ( split, startsWithOneOf, condense, oneOf )
 
 
 main :: IO ()
 main = do
-  -- print(compression testString 1 1)
-  -- print(characterGiver 'A' 4)
-  print(valueSeparator "A111B11C1D3e1f2" 0)
-  -- print (decompression "A5B5C3D4E6F1G1H1I1J1" 0)
-  print("guh")
+    -- print("guh")
+    -- print(compression testString 1 1)
+    -- print(characterGiver 'A' 4)
+    print(pairGiver "A22B23D46G88")
+    print(charAndAmountSplitter ((pairGiver "A22B23D46G88")!!0))
+
+    -- print(charAndAmountSplitter "A22B23D46G88")
+    -- print(decompression ["A1", "B1", "C1", "D3"] 0)
+    print (decompression (pairGiver "A12B23C4D8e1f2g13") 0)
+    
 
 
 
@@ -19,6 +24,20 @@ testString::String
 testString = "AAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
 
 
+pairGiver :: String -> [String]
+pairGiver input =
+  split (startsWithOneOf ['A'..]) input
+
+characterGiver :: Char -> Int -> String
+characterGiver char count =
+  if count > 1 then
+    char : characterGiver char (count - 1)
+  else
+    [char]
+
+charAndAmountSplitter :: String -> [String]
+charAndAmountSplitter input = 
+    split(condense(oneOf['0'..'9'])) input
 
 compression :: String -> Int -> Int -> String
 compression input index count =
@@ -39,38 +58,44 @@ compression input index count =
 -- 9 achtereenvolgende letters
 
 
--- decompression :: String -> Int -> String
--- decompression input index =
--- -- if input!!index+2 == getal, ga naar aparte functie om hier een getal van te maken
---   if index == length input - 1 then
---     characterGiver (input!!index) (read input!!(index+1) :: Int)
---   else
---     if  isDigit (input!!(index+2)) then
---     else
---     characterGiver (input!!index) (read input!!(index+1) :: Int) ++ decompression input (index+2)
+decompression :: [String] -> Int -> String
+decompression input index =    
+    if index == length input - 2 then 
+      characterGiver (input!!index!!0) ( digitToInt (input!!index!!1))
+
+
+      -- characterGiver ((charAndAmountSplitter input!!index)!!0!!0) (digitToInt ((charAndAmountSplitter input!!index)!!0!!1) )
+
+
+        -- [
+        --     characterGiver ((charAndAmountSplitter input!!index)!!0!!0) (read (charAndAmountSplitter input!!index)!!1 :: Int)
+        -- ]
+        
+
+        -- [characterGiver charAndAmount!!0 (read charAndAmount!!1 :: Integer)]
+        --return charactergiver (split letter van Int::hoeveelheid)
+    else 
+      -- DOET HET
+        -- input!!index ++ (decompression input (index+1))
+        characterGiver (input!!index!!0) (digitToInt(input!!index!!1)) ++ decompression input (index+1)
+      
+      
+      --DOET HET NIET      
+      -- characterGiver ((charAndAmountSplitter input!!index)!!0) (digitToInt((charAndAmountSplitter input!!index)!!1)) ++ decompression input (index+1)
+
+        -- [
+        --     characterGiver 
+        --     (charAndAmountSplitter input!!index)!!0 
+        --     (read (charAndAmountSplitter input!!index)!!1 :: Integer)
+        -- ] : decompression input (index+1)
+        
+
+        -- [characterGiver charAndAmount!!0 (read charAndAmount!!1 :: Integer)] : decompression input (index+1)
+        --return charactergiver (split letter van Int::hoeveelheid) : decompression input (index+1) 
 
 
 
-valueSeparator :: String -> Int -> [String]
-valueSeparator input index =
-  split (startsWithOneOf ['A'..]) input
 
-
---   if index == length input - 1 then
-  
---   else
---     if isDigit (input!!(index+1)) then
---       input!!(index+1) : amountCompleter input (index+1)
---     else
---       [input!!(index+1)] 
-
-
-characterGiver :: Char -> Int -> String
-characterGiver char count =
-  if count > 1 then
-    char : characterGiver char (count - 1)
-  else
-    [char]
 
 -- TESTS --
 
