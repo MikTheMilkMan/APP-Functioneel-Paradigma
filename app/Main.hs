@@ -9,7 +9,7 @@ main :: IO ()
 main = do
   -- print(compression testString 1 1)
   -- print(characterGiver 'A' 4)
-  print(valueSeparator "A111B11C1D3" 0)
+  print(valueSeparator "A111B11C1D3e1f2" 0)
   -- print (decompression "A5B5C3D4E6F1G1H1I1J1" 0)
   print("guh")
 
@@ -51,9 +51,9 @@ compression input index count =
 
 
 
-valueSeparator :: String -> Int -> String
+valueSeparator :: String -> Int -> [String]
 valueSeparator input index =
-  split (startsWithOneOf ['a'..'Z']) input
+  split (startsWithOneOf ['A'..]) input
 
 
 --   if index == length input - 1 then
