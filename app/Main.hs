@@ -51,6 +51,10 @@ main = do
 
       print (compression testString 1 1)
       print (decompression (compression testString 1 1))
+      print ("========================")
+      print (compression testString2 1 1) 
+      print (decompression (compression testString2 1 1))
+
     
 
 
@@ -58,35 +62,29 @@ main = do
 testString::String
 testString = "AAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
 
+testString2::String
+testString2 = "AAAAAAAAAABBBBBCCCDDDDEEEEEEFGHIJjjJ"
 
-characterGiver :: Char -> Integer -> String
-characterGiver char count =
-  if count > 1 then
-    char : characterGiver char (count - 1)
-  else
-    [char]
 
-charAndAmountSplitter :: String -> [String]
-charAndAmountSplitter input = 
-    split(condense(oneOf['0'..'9'])) input
+
 
 compression :: String -> Int -> Int -> String
 compression input index count =
   if index == length input - 1 then
     if input!!index /= input!!(index - 1) then
-      [input!!(index - 1), intToDigit count, input!!index, intToDigit 1]
+      [input!!(index - 1)] ++ show count ++ [input!!index] ++ show 1
     else
-      [input!!index, intToDigit (count + 1)]
+      [input!!index] ++ show (count + 1)
+
 
   else
     if input!!index /= input!!(index - 1) then
-      [input!!(index - 1), intToDigit count] ++ compression input (index + 1) 1
+      [input!!(index - 1)] ++ show count ++ compression input (index + 1) 1
     else
       compression input (index + 1) (count + 1)
 
 
--- Eventjes anders designen, omdat je (als dit zou werken) niet verder zou kunnen komen dan 
--- 9 achtereenvolgende letters
+
   
 
 decompression :: String -> String
@@ -105,6 +103,19 @@ decode input index =
         ((charAndAmountSplitter (input!!index))!!0!!0) 
         (stringToInteger ((charAndAmountSplitter (input!!index))!!1))
       ++ decode input (index+1)
+
+characterGiver :: Char -> Integer -> String
+characterGiver char count =
+  if count > 1 then
+    char : characterGiver char (count - 1)
+  else
+    [char]
+
+charAndAmountSplitter :: String -> [String]
+charAndAmountSplitter input = 
+    split(condense(oneOf['0'..'9'])) input
+
+
 
 
 -- TESTS --
