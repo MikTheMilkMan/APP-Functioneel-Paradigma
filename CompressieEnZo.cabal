@@ -67,7 +67,8 @@ executable CompressieEnZo
     build-depends:    
         base ^>=4.18.3.0,
         split ^>=0.2.3.3,
-        integer-conversion ^>=0.1.1
+        integer-conversion ^>=0.1.1,
+        JuicyPixels ^>=3.3.9
 
     -- Directories containing source files.
     hs-source-dirs:   app
